@@ -1,15 +1,12 @@
-use yew::{Component, ComponentLink, Html, html, ShouldRender};
-use yew_router::prelude::*;
+use yew::{Component, ComponentLink, html, Html,  ShouldRender};
 
-use crate::routes::{AppRoute, app_switch};
-
-pub struct App {
+pub struct Home {
     link: ComponentLink<Self>,
 }
 
 pub enum Msg {}
 
-impl Component for App {
+impl Component for Home {
     type Message = Msg;
     type Properties = ();
 
@@ -30,9 +27,8 @@ impl Component for App {
     fn view(&self) -> Html {
         html! {
             <div>
-                <h1>{ "Hello App" }</h1>
-                <Router<AppRoute> render={Router::render(app_switch)} />
-            </div>    
+                <h2>{"Hello Home"}</h2>
+            </div>
         }
     }
 }
