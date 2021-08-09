@@ -1,7 +1,7 @@
 use yew::{Component, ComponentLink, Html, html, ShouldRender};
 use yew_router::prelude::*;
 
-use crate::routes::{AppRoute, app_switch};
+use crate::routes::{AppRoute, switch};
 
 pub struct App {
     link: ComponentLink<Self>,
@@ -31,7 +31,7 @@ impl Component for App {
         html! {
             <div>
                 <h1>{ "Hello App" }</h1>
-                <Router<AppRoute> render={Router::render(app_switch)} />
+                <Router<AppRoute> render={Router::render(switch)} />
             </div>    
         }
     }
