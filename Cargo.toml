@@ -6,7 +6,12 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+dotenv_codegen = "0.15.0"
 lazy_static = "1.4.0"
+log = "0.4.14"
 parking_lot = "0.11.1"
+serde = "1.0.127"
+serde_json = "1.0.66"
+thiserror = "1.0.26"
 yew = "0.18"
 yew-router = "0.15"
