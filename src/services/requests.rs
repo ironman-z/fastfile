@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 use parking_lot::RwLock;
 use serde::{Deserialize, Serialize};
 use yew::callback::Callback;
-use yew::format::{Text};
+use yew::format::{Json, Nothing, Text};
 use yew::services::fetch::{FetchService, FetchTask, Request, Response};
 use yew::services::storage::{Area, StorageService};
 
@@ -83,5 +83,47 @@ impl Requests {
         debug!("Request: {:?}", request);
 
         FetchService::fetch(request, handler.into()).unwrap()
+    }
+
+    pub fn get<T>(&mut self, url: String, callback: Callback<Result<T, Error>>) -> FetchTask
+    where
+        for<'de> T: Deserialize<'de> + 'static + std::fmt::Debug,
+    {
+        self.builder("GET", url, Nothing, callback)
+    }
+
+    pub fn post<B, T>(
+        &mut self,
+        url: String,
+        body: B,
+        callback: Callback<Result<T, Error>>,
+    ) -> FetchTask
+    where
+        for<'de> T: Deserialize<'de> + 'static + std::fmt::Debug,
+        B: Serialize,
+    {
+        let body: Text = Json(&body).into();
+        self.builder("POST", url, body, callback)
+    }
+
+    pub fn put<B,T>(
+        &mut self,
+        url: String,
+        body: B,
+        callback: Callback<Result<T, Error>>,
+    ) -> FetchTask
+    where
+        for<'de> T: Deserialize<'de> + 'static + std::fmt::Debug,
+        B: Serialize,
+    {
+        let body: Text = Json(&body).into();
+        self.builder("PUT", url, body, callback)
+    }
+
+    pub fn delete<T>(&mut self, url: String, callback: Callback<Result<T, Error>>) -> FetchTask
+    where
+        for<'de> T: Deserialize<'de> + 'static + std::fmt::Debug,
+    {
+        self.builder("DELETE", url, Nothing, callback)
     }
 }
