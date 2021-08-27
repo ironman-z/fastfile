@@ -24,6 +24,11 @@ lazy_static! {
     };
 }
 
+pub fn set_token(token: Option<String>) {
+    let mut token_lock = TOKEN.write();
+    *token_lock = token;
+}
+
 pub fn get_token() -> Option<String> {
     let token_lock = TOKEN.read();
     token_lock.clone()
