@@ -34,6 +34,7 @@ pub fn get_token() -> Option<String> {
     token_lock.clone()
 }
 
+#[derive(Default, Debug)]
 pub struct Requests {}
 
 impl Requests {
